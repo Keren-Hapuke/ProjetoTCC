@@ -1,0 +1,45 @@
+{% extends 'paginas/modelo-ifpb.html' %}
+
+{% load static %}
+
+{% block conteudo %}
+
+<div class="row">
+
+    {% if request.user.is_authenticated %}
+    <div class="col-md mx-auto">
+        <h3>
+            <i class="fa fa-exclamation" aria-hidden="true"></i>
+            Ação não permitida
+        </h3>
+        <hr>
+        <p class="lead">
+            <strong>
+                Houve algum problema para processar a ação desejada ou você não tem permissão para isso.
+            </strong>
+        </p>
+    </div>
+    {% else %}
+
+    <div class="col-md-4 mx-auto">
+
+        <h1>Autenticação</h1>
+
+        <p>Preencha todos os campos obrigatórios.</p>
+
+        <hr>
+
+        <form action="" method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-primary">Entrar</button>
+
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'paginas/modelo-ifpb.html' %}
+
+{% load static %}
+
+{% block conteudo %}
+
+<h3>
+    Lista de relatórios registrados
+    <a href="{% url 'cadastrar-relatorio' %}" class="btn btn-primary btn-sm float-right">Adicionar relatório</a>
+</h3>
+<hr>
+<div class="table responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Autor</th>
+            <th>Orientador</th>
+            <th>Curso</th>
+            <th>Arquivo</th>
+            <th>Opções</th>
+        </tr>
+
+        {% for relatorio in object_list %}
+        <tr>
+            <td>{{ relatorio.autor }}</td>
+            <td>{{ relatorio.orientador }}</td>
+            <td>{{ relatorio.curso }}</td>
+            <td>{{ relatorio.arquivo }}</td>
+            <td>
+                <a href="{% url 'editar-relatorio' campo.pk %}" class="btn btn-warning" title="Editar">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'excluir-relatorio' campo.pk %}" class="btn btn-danger" title="Excluir">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhum relatório registrado.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

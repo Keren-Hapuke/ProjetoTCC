@@ -1,0 +1,40 @@
+{% extends 'paginas/modelo-ifpb.html' %}
+
+{% load static %}
+
+{% block conteudo %}
+
+<h3>
+    Lista de orientadores registrados
+    <a href="{% url 'cadastrar-orientador' %}" class="btn btn-primary btn-sm float-right">Adicionar orientador</a>
+</h3>
+<hr>
+<div class="table responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Opções</th>
+        </tr>
+
+        {% for orientador in object_list %}
+        <tr>
+            <td>{{ orientador.nome }}</td>
+            <td>{{ orientador.sobrenome }}</td>
+            <td>
+                <a href="{% url 'editar-orientador' campo.pk %}" class="btn btn-warning" title="Editar">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a href="{% url 'excluir-orientador' campo.pk %}" class="btn btn-danger" title="Excluir">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhum orientador registrado.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
